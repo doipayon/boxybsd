@@ -29,9 +29,6 @@ String getJoke() {
   http.GET();
   String result = http.getString();
 
-  return result;
-
-/*
   DynamicJsonDocument doc(2048);
   DeserializationError error = deserializeJson(doc, result);
 
@@ -42,14 +39,20 @@ String getJoke() {
     return "<error>";
   }
 
-  String type = "single"; //doc["FeelsLikeC"].as<String>();
+  //Serial.println(doc["current_condition"].as<String>());
   //doc["stargazers"]["totalCount"];
+  /*
   String joke = doc["current_condition"]["FeelsLikeC"].as<String>();
   String setup = doc["current_condition"]["humidity"].as<String>();
   String delivery = doc["current_condition"]["localObsDateTime"].as<String>();
-  http.end();
-  return type.equals("single") ? joke : setup + "  " + delivery;
   */
+  //String curr_cond = doc["current_condition"].as<String>();
+  String temp = "Feels like " + doc["current_condition"][0]["FeelsLikeC"].as<String>();
+  
+  http.end();
+
+  //return joke + setup + "  " + delivery;
+  return temp;
 }
 
 void nextJoke() {
